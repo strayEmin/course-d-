@@ -45,9 +45,11 @@ size_t ordered_array_set_ind(ordered_array_set_t *set, int value) {
     return binarySearch_(set->data, set->size, value);
 }
 
+
 bool ordered_array_set_isValueIn(ordered_array_set_t set, int value) {
     return ordered_array_set_ind(&set, value) != set.size;
 }
+
 
 bool ordered_array_set_isEqual(ordered_array_set_t set1, ordered_array_set_t set2) {
     if (set1.size != set2.size)
@@ -60,6 +62,7 @@ bool ordered_array_set_isEqual(ordered_array_set_t set1, ordered_array_set_t set
 
     return true;
 }
+
 
 bool ordered_array_set_isSubset(ordered_array_set_t subset,
                                 ordered_array_set_t set) {
@@ -95,12 +98,14 @@ void ordered_array_set_insert(ordered_array_set_t *set, int value) {
     }
 }
 
+
 void ordered_array_set_deleteElement(ordered_array_set_t *set, int value) {
     size_t index_of_value = ordered_array_set_ind(set, value);
 
     if (index_of_value < set->size)
         deleteByIndexAndSaveOrder_(set->data, &set->size, index_of_value);
 }
+
 
 ordered_array_set_t ordered_array_set_union(ordered_array_set_t set1,
                                             ordered_array_set_t set2) {
@@ -118,3 +123,65 @@ ordered_array_set_t ordered_array_set_union(ordered_array_set_t set1,
     return result;
 }
 
+
+ordered_array_set_t ordered_array_set_intersection(ordered_array_set_t set1,
+                                                   ordered_array_set_t set2) {
+
+    ordered_array_set_t result = ordered_array_set_create(set1.size);
+    for (size_t i = 0; i < set1.size; i++) {
+        if (ordered_array_set_isValueIn(set2, set1.data[i]))
+            ordered_array_set_insert(&result, set1.data[i]);
+    }
+
+    ordered_array_set_shrinkToFit(&result);
+
+    return result;
+}
+
+
+ordered_array_set_t ordered_array_set_difference(ordered_array_set_t set1,
+                                                 ordered_array_set_t set2) {
+    ordered_array_set_t result = ordered_array_set_create(set1.size);
+
+    for (size_t i = 0; i < set1.size; i++) {
+        if (!ordered_array_set_isValueIn(set2, set1.data[i]))
+            result.data[result.size++] = set1.data[i];
+    }
+
+    ordered_array_set_shrinkToFit(&result);
+
+    return result;
+}
+
+
+ordered_array_set_t ordered_array_set_symmetricDifference(ordered_array_set_t set1,
+                                                          ordered_array_set_t set2) {
+    ordered_array_set_t l_diff = ordered_array_set_difference(set1, set2);
+    ordered_array_set_t r_diff = ordered_array_set_difference(set2, set1);
+
+    ordered_array_set_t result = ordered_array_set_create(l_diff.size + r_diff.size);
+
+    result.size = result.capacity;
+
+    memcpy(result.data, l_diff.data, l_diff.size * sizeof(int));
+    memcpy(&result.data[l_diff.size], r_diff.data, r_diff.size * sizeof(int));
+
+    ordered_array_set_delete(l_diff);
+    ordered_array_set_delete(r_diff);
+
+    return result;
+}
+
+ordered_array_set_t ordered_array_set_complement(ordered_array_set_t set,
+                                                 ordered_array_set_t universumSet) {
+    assert(ordered_array_set_isSubset(set, universumSet));
+    return ordered_array_set_difference(universumSet, set);
+}
+
+void ordered_array_set_print(ordered_array_set_t set) {
+    outputArray_(set.data, set.size);
+}
+
+void ordered_array_set_delete(ordered_array_set_t set) {
+    free(set.data);
+}

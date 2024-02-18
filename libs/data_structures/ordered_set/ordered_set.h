@@ -9,7 +9,6 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "C:\Users\пашк\Desktop\лабы\основы алг и проги\clion\course\libs\algorithms\array\array.h"
-#include "C:\Users\пашк\Desktop\лабы\основы алг и проги\clion\course\libs\data_structures\unordered_set\unordered_set.h"
 
 
 typedef struct ordered_array_set {
