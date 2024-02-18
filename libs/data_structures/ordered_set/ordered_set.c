@@ -17,15 +17,25 @@ ordered_array_set_t ordered_array_set_create(size_t capacity) {
 }
 
 
-void unordered_array_set_shrinkToFit(ordered_array_set_t *set) {
+void ordered_array_set_shrinkToFit(ordered_array_set_t *set) {
     if (set->size != set->capacity) {
         set->data = (int *) realloc(set->data, sizeof(int) * set->size);
         if (set->data == NULL) {
-            fprintf(stderr, "Fail memory allocated in unordered_array_set_shrinkToFit\n"
-                            "File: .../libs/data_structures/unordered_set/unordered_set.h");
+            fprintf(stderr, "Fail memory allocated in ordered_array_set_shrinkToFit\n"
+                            "File: .../libs/data_structures/ordered_set/ordered_set.h");
             exit(-1);
         }
         set->capacity = set->size;
     }
+}
+
+ordered_array_set_t ordered_array_set_create_from_array(const int *a,
+                                                        size_t size) {
+    ordered_array_set_t set = ordered_array_set_create(size);
+    for (size_t i = 0; i < size; i++)
+        ordered_array_set_insert(&set, a[i]);
+    ordered_array_set_shrinkToFit(&set);
+
+    return set;
 }
 
