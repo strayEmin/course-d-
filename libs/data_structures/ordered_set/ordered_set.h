@@ -31,7 +31,10 @@ ordered_array_set_t ordered_array_set_create_from_array(const int *a,
 // возвращает значение позицию элемента в множестве,
 // если значение value имеется в множестве set,
 // иначе - size
-size_t ordered_array_set_in(ordered_array_set_t set, int value);
+size_t ordered_array_set_ind(ordered_array_set_t set, int value);
+
+// возращает true если элемент value имеется в множестве set, иначе false
+bool ordered_array_set_isValueIn(ordered_array_set_t set, int value);
 
 // возвращает значение ’истина’, если элементы множеств set1 и set2 равны
 // иначе - ’ложь’
@@ -39,8 +42,7 @@ bool ordered_array_set_isEqual(ordered_array_set_t set1, ordered_array_set_t set
 
 // возвращает значение ’истина’, если subset является подмножеством set
 // иначе - ’ложь’
-bool
-ordered_array_set_isSubset(ordered_array_set_t subset, ordered_array_set_t set);
+bool ordered_array_set_isSubset(ordered_array_set_t subset, ordered_array_set_t set);
 
 // возбуждает исключение, если в множество по адресу set
 // нельзя вставить элемент

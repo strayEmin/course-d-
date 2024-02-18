@@ -41,7 +41,27 @@ ordered_array_set_t ordered_array_set_create_from_array(const int *a,
 }
 
 
-size_t ordered_array_set_in(ordered_array_set_t set, int value) {
+size_t ordered_array_set_ind(ordered_array_set_t set, int value) {
     return binarySearch_(set.data, set.size, value);
 }
 
+bool ordered_array_set_isValueIn(ordered_array_set_t set, int value) {
+    return ordered_array_set_ind(set, value) != set.size;
+}
+
+bool ordered_array_set_isEqual(ordered_array_set_t set1, ordered_array_set_t set2) {
+    if (set1.size != set2.size)
+        return false;
+
+    for (size_t i = 0; i < set1.size; i++) {
+        if (set1.data[i] != set2.data[i])
+            return false;
+    }
+
+    return true;
+}
+
+bool ordered_array_set_isSubset(ordered_array_set_t subset,
+                                ordered_array_set_t set) {
+
+}
