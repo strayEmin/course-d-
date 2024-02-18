@@ -74,24 +74,22 @@ void unordered_array_set_deleteElement(unordered_array_set *set, int value) {
 
 unordered_array_set unordered_array_set_union(unordered_array_set set1,
                                               unordered_array_set set2) {
-    unordered_array_set result = unordered_array_set_create(set1.size + set2.size);
-
-    for (int i = 0; i < set1.size; i++)
-        unordered_array_set_insert(&result, set1.data[i]);
-    for (int i = 0; i < set2.size; i++)
-        unordered_array_set_insert(&result, set2.data[i]);
-
-    unordered_array_set_shrinkToFit(&result);
-    /* or
      unordered_array_set result = set1;
      result.capacity = set1.size + set2.size;
-     result.data = (int *)realloc(result.data, sizeof(int) * capacity);
-     if (result.data == NULL)
-         fprintf(stderr, "Fail memory allocated in unordered_array_set_union./n
-         File: libs/data_structures/unordered_set/unordered_set.h");
+     result.data = (int *)realloc(result.data, sizeof(int) * result.capacity);
+     if (result.data == NULL) {
+         fprintf(stderr, "Fail memory allocated in unordered_array_set_union.\n"
+                         "File: libs/data_structures/unordered_set/unordered_set.h");
          exit(-1);
-     */
-    return result;
+     }
+
+     for (int i = 0; i < set2.size; i++) {
+         unordered_array_set_insert(&result, set2.data[i]);
+     }
+
+     unordered_array_set_shrinkToFit(&result);
+
+     return result;
 }
 
 unordered_array_set unordered_array_set_intersection(unordered_array_set set1,
@@ -107,6 +105,14 @@ unordered_array_set unordered_array_set_intersection(unordered_array_set set1,
     return result;
 }
 
+unordered_array_set unordered_array_set_difference(unordered_array_set set1,
+                                                   unordered_array_set set2) {
+    unordered_array_set result = set1;
+    for (int i = 0; i < set1.size; i++) {
+        if (int)
+    }
+
+}
 
 
 
