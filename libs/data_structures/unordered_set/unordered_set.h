@@ -10,7 +10,7 @@
 #include <memory.h>
 #include <stdio.h>
 #include <stdbool.h>
-#include "C:\Users\пашк\Desktop\лабы\основы алг и проги\code\libs\algorithms\array\array.h"
+#include "C:\Users\пашк\Desktop\лабы\основы алг и проги\clion\course\libs\algorithms\array\array.h"
 
 typedef struct unordered_array_set {
     int *data; // элементы множества
