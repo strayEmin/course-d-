@@ -52,8 +52,6 @@ bool unordered_array_set_isEqual(
 );
 
 // возбуждает исключение, если в множество по адресу set
-
-
 // нельзя вставить элемент
 void unordered_array_set_isAbleAppend(unordered_array_set *set);
 
