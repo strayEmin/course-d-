@@ -14,6 +14,8 @@ void outputArray_(const int arr[], size_t size) {
     for (int i = 0; i < size; i++) {
         printf("%d ", arr[i]);
     }
+
+    printf("\n");
 }
 
 size_t getFirstIndexOfNumber_(const int *const a, const size_t n, const int x) {
