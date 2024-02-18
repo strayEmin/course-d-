@@ -228,7 +228,7 @@ void deleteIf_(int *const a, size_t *const n, int (*deletePredicate)(int)) {
 
 size_t binarySearch_(const int *a, size_t n, int x) {
     size_t left = 0;
-    size_t right = n - 1;
+    size_t right = n;
     while (left <= right) {
         size_t middle = left + (right - left) / 2;
         if (a[middle] < x)
