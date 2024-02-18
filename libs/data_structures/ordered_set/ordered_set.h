@@ -30,8 +30,8 @@ ordered_array_set_t ordered_array_set_create_from_array(const int *a,
 
 // возвращает значение позицию элемента в множестве,
 // если значение value имеется в множестве set,
-// иначе - n
-size_t ordered_array_set_in(ordered_array_set_t *set, int value);
+// иначе - size
+size_t ordered_array_set_in(ordered_array_set_t set, int value);
 
 // возвращает значение ’истина’, если элементы множеств set1 и set2 равны
 // иначе - ’ложь’

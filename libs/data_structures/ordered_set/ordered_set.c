@@ -29,6 +29,7 @@ void ordered_array_set_shrinkToFit(ordered_array_set_t *set) {
     }
 }
 
+
 ordered_array_set_t ordered_array_set_create_from_array(const int *a,
                                                         size_t size) {
     ordered_array_set_t set = ordered_array_set_create(size);
@@ -37,5 +38,10 @@ ordered_array_set_t ordered_array_set_create_from_array(const int *a,
     ordered_array_set_shrinkToFit(&set);
 
     return set;
+}
+
+
+size_t ordered_array_set_in(ordered_array_set_t set, int value) {
+    return binarySearch_(set.data, set.size, value);
 }
 
