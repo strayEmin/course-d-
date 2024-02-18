@@ -102,3 +102,19 @@ void ordered_array_set_deleteElement(ordered_array_set_t *set, int value) {
         deleteByIndexAndSaveOrder_(set->data, &set->size, index_of_value);
 }
 
+ordered_array_set_t ordered_array_set_union(ordered_array_set_t set1,
+                                            ordered_array_set_t set2) {
+    ordered_array_set_t result = ordered_array_set_create(set1.size + set2.size);
+
+    memcpy(result.data, set1.data, set1.size * sizeof(int));
+    result.size = set1.size;
+
+    for (size_t i = 0; i < set2.size; i++) {
+        ordered_array_set_insert(&result, set2.data[i]);
+    }
+
+    ordered_array_set_shrinkToFit(&result);
+
+    return result;
+}
+
