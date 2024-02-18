@@ -98,12 +98,15 @@ unordered_array_set unordered_array_set_intersection(unordered_array_set set1,
                                                      unordered_array_set set2) {
     unordered_array_set result = unordered_array_set_create(set1.size);
     for (int i = 0; i < set1.size; i++) {
-        //if (unordered_array_set_isValueIn(set2, set1.data[i]))
-
+        if (unordered_array_set_isValueIn(set2, set1.data[i]))
+            unordered_array_set_insert(&result, set1.data[i]);
     }
 
+    unordered_array_set_shrinkToFit(&result);
 
-
+    return result;
 }
+
+
 
 
