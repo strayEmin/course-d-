@@ -129,6 +129,13 @@ unordered_array_set unordered_array_set_difference(unordered_array_set set1,
 }
 
 
+unordered_array_set unordered_array_set_complement(unordered_array_set set,
+                                                   unordered_array_set universumSet) {
+    return unordered_array_set_difference(universumSet, set);
+}
+
+
+
 
 
 
