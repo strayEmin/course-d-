@@ -18,10 +18,11 @@ typedef struct ordered_array_set {
     size_t capacity; // максимальное количество элементов в множестве
 } ordered_array_set_t;
 
-void ordered_array_set_shrinkToFit(ordered_array_set_t *set);
-
 // возвращает пустое множество, в которое можно вставить capacity элементов
 ordered_array_set_t ordered_array_set_create(size_t capacity);
+
+// изменяет размер массива data до размера size и присваивает capacity размер множества
+void ordered_array_set_shrinkToFit(ordered_array_set_t *set);
 
 // возвращает множество, состоящее из элементов массива a размера size
 ordered_array_set_t ordered_array_set_create_from_array(const int *a,
