@@ -86,9 +86,8 @@ unordered_array_set unordered_array_set_union(unordered_array_set set1,
                                               unordered_array_set set2) {
      unordered_array_set result = unordered_array_set_create(set1.size + set2.size);
 
-     for (size_t i = 0; i < set1.size; i++) {
-         result.data[i] = set1.data[i];
-     }
+     memcpy(result.data, set1.data, set1.size * sizeof(int));
+     result.size = set1.size;
 
      for (size_t i = 0; i < set2.size; i++) {
          unordered_array_set_insert(&result, set2.data[i]);
@@ -134,7 +133,12 @@ unordered_array_set unordered_array_set_complement(unordered_array_set set,
     return unordered_array_set_difference(universumSet, set);
 }
 
-
+unordered_array_set unordered_array_set_symmetricDifference(unordered_array_set set1,
+                                                            unordered_array_set set2) {
+    unordered_array_set result = unordered_array_set_create(set1.size + set2.size);
+    unordered_array_set diff1 = unordered_array_set_difference(set1, set2);
+    unordered_array_set diff2 = unordered_array_set_difference(set2, set1);
+}
 
 
 
