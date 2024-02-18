@@ -19,7 +19,7 @@ unordered_array_set unordered_array_set_create(size_t capacity) {
 void unordered_array_set_shrinkToFit(unordered_array_set *set) {
     if (set->size != set->capacity) {
         set->data = (int *) realloc(set->data, sizeof(int) * set->size);
-        if (set->data == NULL){
+        if (set->data == NULL) {
             fprintf(stderr, "Fail memory allocated in unordered_array_set_shrinkToFit\n"
                             "File: .../libs/data_structures/unordered_set/unordered_set.h");
             exit(-1);
@@ -84,18 +84,18 @@ void unordered_array_set_deleteElement(unordered_array_set *set, int value) {
 
 unordered_array_set unordered_array_set_union(unordered_array_set set1,
                                               unordered_array_set set2) {
-     unordered_array_set result = unordered_array_set_create(set1.size + set2.size);
+    unordered_array_set result = unordered_array_set_create(set1.size + set2.size);
 
-     memcpy(result.data, set1.data, set1.size * sizeof(int));
-     result.size = set1.size;
+    memcpy(result.data, set1.data, set1.size * sizeof(int));
+    result.size = set1.size;
 
-     for (size_t i = 0; i < set2.size; i++) {
-         unordered_array_set_insert(&result, set2.data[i]);
-     }
+    for (size_t i = 0; i < set2.size; i++) {
+        unordered_array_set_insert(&result, set2.data[i]);
+    }
 
-     unordered_array_set_shrinkToFit(&result);
+    unordered_array_set_shrinkToFit(&result);
 
-     return result;
+    return result;
 }
 
 
@@ -134,6 +134,7 @@ unordered_array_set unordered_array_set_complement(unordered_array_set set,
     return unordered_array_set_difference(universumSet, set);
 }
 
+
 unordered_array_set unordered_array_set_symmetricDifference(unordered_array_set set1,
                                                             unordered_array_set set2) {
     unordered_array_set l_diff = unordered_array_set_difference(set1, set2);
@@ -153,9 +154,19 @@ unordered_array_set unordered_array_set_symmetricDifference(unordered_array_set 
 }
 
 
+void unordered_array_set_print(unordered_array_set set) {
+    for (size_t i = 0; i < set.size; i++)
+        printf("%d ", set.data[i]);
+
+    printf("\n");
+}
+
+
 void unordered_array_set_delete(unordered_array_set set) {
     free(set.data);
 }
+
+
 
 
 
