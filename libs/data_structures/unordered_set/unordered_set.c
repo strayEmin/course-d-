@@ -61,6 +61,21 @@ bool unordered_array_set_isSubset(unordered_array_set_t subset, unordered_array_
 }
 
 
+bool unordered_array_set_isEqual(unordered_array_set_t set1,
+                                 unordered_array_set_t set2) {
+    if (set1.size != set2.size)
+        return false;
+
+    size_t matches = 0;
+    for (size_t i = 0; i < set1.size; i++) {
+        if (unordered_array_set_isValueIn(set2, set1.data[i]))
+            matches++;
+    }
+
+    return set1.size == matches;
+}
+
+
 void unordered_array_set_isAbleAppend(unordered_array_set_t *set) {
     assert(set->size < set->capacity);
 }
