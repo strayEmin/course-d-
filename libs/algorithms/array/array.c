@@ -243,6 +243,28 @@ size_t binarySearch_(const int *a, size_t n, int x) {
     return n;
 }
 
+size_t binarySearchLower_(const int arr[], size_t size, int value) {
+    if (value <= arr[0] || size == 0)
+        return size;
+    if (value > arr[size - 1])
+        return size - 1;
+    size_t low = 0;
+    size_t high = size - 1;
+    size_t middle;
+    while (low + 1 < high) {
+        middle = (low + high) / 2;
+        if (arr[middle] < value)
+            low = middle;
+        else
+            high = middle;
+    }
+    while (arr[low + 1] == arr[low])
+        low++;
+
+    return low;
+}
+
+
 size_t binarySearchMoreOrEqual_(const int *a, size_t n, int x) {
     if (a[0] >= x)
         return 0;

@@ -63,5 +63,32 @@ bool ordered_array_set_isEqual(ordered_array_set_t set1, ordered_array_set_t set
 
 bool ordered_array_set_isSubset(ordered_array_set_t subset,
                                 ordered_array_set_t set) {
+    size_t matches = 0;
+    for (size_t i = 0; i < subset.size; i++) {
+        if (ordered_array_set_isValueIn(set, subset.data[i]))
+            matches++;
+    }
 
+    return matches == subset.size;
+}
+
+
+void ordered_array_set_isAbleAppend(ordered_array_set_t *set) {
+    assert(set->size < set->capacity);
+}
+
+
+void ordered_array_set_insert(ordered_array_set_t *set, int value) {
+    if (ordered_array_set_ind(*set, value) == set->size) {
+        ordered_array_set_isAbleAppend(set);
+        if (set->size - 1 >= set->capacity) {
+            set->data[set->size++] = value;
+        } else {
+            size_t reserved_index = binarySearchMoreOrEqual_(*set, value);
+            for (size_t i = set->size; i >= reserved_index; i--)
+                set->data[i] = set->data[i - 1];
+            set->data[reserved_index] = value;
+            set->size++;
+        }
+    }
 }

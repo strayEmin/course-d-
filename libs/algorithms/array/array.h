@@ -65,6 +65,10 @@ bool all_(const int *a, const int size, bool (*predicate)(int));
 //а иначе в массиве c размера по указателю *len_c
 void arraySplit_(int *a, const size_t len_a, int *b, size_t *len_b, int *c, size_t *len_c, bool (*predicate)(int));
 
+// возвращает позицию последнюю позицию вхождения элемента меньшего x
+// в отсортированном массиве a размера n при его наличии, иначе - n
+size_t binarySearchLower_(const int arr[], size_t size, int value);
+
 // возвращает позицию вхождения элемента x
 // в отсортированном массиве a размера n при его наличии, иначе - n
 size_t binarySearch_(const int *a, const size_t n, int x);
