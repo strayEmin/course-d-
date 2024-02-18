@@ -155,10 +155,7 @@ unordered_array_set unordered_array_set_symmetricDifference(unordered_array_set 
 
 
 void unordered_array_set_print(unordered_array_set set) {
-    for (size_t i = 0; i < set.size; i++)
-        printf("%d ", set.data[i]);
-
-    printf("\n");
+    outputArray_(set.data, set.size);
 }
 
 
