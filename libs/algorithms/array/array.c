@@ -212,18 +212,18 @@ int countIf_(const int *const a, const size_t n, int (*predicate)(int)) {
 }
 
 void deleteIf_(int *const a, size_t *const n, int (*deletePredicate)(int)) {
-    size_t iRead = 0;
-    while (iRead < *n && !deletePredicate(a[iRead]))
-        iRead++;
-    size_t iWrite = iRead;
-    while (iRead < *n) {
-        if (!deletePredicate(a[iRead])) {
-            a[iWrite] = a[iRead];
-            iWrite++;
+    size_t i_read = 0;
+    while (i_read < *n && !deletePredicate(a[i_read]))
+        i_read++;
+    size_t i_write = i_read;
+    while (i_read < *n) {
+        if (!deletePredicate(a[i_read])) {
+            a[i_write] = a[i_read];
+            i_write++;
         }
-        iRead++;
+        i_read++;
     }
-    *n = iWrite;
+    *n = i_write;
 }
 
 size_t binarySearch_(const int *a, size_t n, int x) {
