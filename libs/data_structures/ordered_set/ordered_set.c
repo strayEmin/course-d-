@@ -41,12 +41,12 @@ ordered_array_set_t ordered_array_set_create_from_array(const int *a,
 }
 
 
-size_t ordered_array_set_ind(ordered_array_set_t set, int value) {
-    return binarySearch_(set.data, set.size, value);
+size_t ordered_array_set_ind(ordered_array_set_t *set, int value) {
+    return binarySearch_(set->data, set->size, value);
 }
 
 bool ordered_array_set_isValueIn(ordered_array_set_t set, int value) {
-    return ordered_array_set_ind(set, value) != set.size;
+    return ordered_array_set_ind(&set, value) != set.size;
 }
 
 bool ordered_array_set_isEqual(ordered_array_set_t set1, ordered_array_set_t set2) {
@@ -79,16 +79,26 @@ void ordered_array_set_isAbleAppend(ordered_array_set_t *set) {
 
 
 void ordered_array_set_insert(ordered_array_set_t *set, int value) {
-    if (ordered_array_set_ind(*set, value) == set->size) {
+    if (ordered_array_set_ind(set, value) == set->size) {
         ordered_array_set_isAbleAppend(set);
         if (set->size - 1 >= set->capacity) {
             set->data[set->size++] = value;
         } else {
-            size_t reserved_index = binarySearchMoreOrEqual_(*set, value);
-            for (size_t i = set->size; i >= reserved_index; i--)
+            size_t reserved_index = binarySearchMoreOrEqual_(set->data, set->size, value);
+
+            for (size_t i = set->size; i > reserved_index; i--)
                 set->data[i] = set->data[i - 1];
+
             set->data[reserved_index] = value;
             set->size++;
         }
     }
 }
+
+void ordered_array_set_deleteElement(ordered_array_set_t *set, int value) {
+    size_t index_of_value = ordered_array_set_ind(set, value);
+
+    if (index_of_value < set->size)
+        deleteByIndexAndSaveOrder_(set->data, &set->size, index_of_value);
+}
+

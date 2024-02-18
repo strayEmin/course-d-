@@ -31,7 +31,7 @@ ordered_array_set_t ordered_array_set_create_from_array(const int *a,
 // возвращает значение позицию элемента в множестве,
 // если значение value имеется в множестве set,
 // иначе - size
-size_t ordered_array_set_ind(ordered_array_set_t set, int value);
+size_t ordered_array_set_ind(ordered_array_set_t *set, int value);
 
 // возращает true если элемент value имеется в множестве set, иначе false
 bool ordered_array_set_isValueIn(ordered_array_set_t set, int value);
