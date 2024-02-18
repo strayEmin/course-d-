@@ -130,15 +130,33 @@ unordered_array_set unordered_array_set_difference(unordered_array_set set1,
 
 unordered_array_set unordered_array_set_complement(unordered_array_set set,
                                                    unordered_array_set universumSet) {
+    assert(unordered_array_set_isSubset(set, universumSet));
     return unordered_array_set_difference(universumSet, set);
 }
 
 unordered_array_set unordered_array_set_symmetricDifference(unordered_array_set set1,
                                                             unordered_array_set set2) {
-    unordered_array_set result = unordered_array_set_create(set1.size + set2.size);
-    unordered_array_set diff1 = unordered_array_set_difference(set1, set2);
-    unordered_array_set diff2 = unordered_array_set_difference(set2, set1);
+    unordered_array_set l_diff = unordered_array_set_difference(set1, set2);
+    unordered_array_set r_diff = unordered_array_set_difference(set2, set1);
+
+    unordered_array_set result = unordered_array_set_create(l_diff.size + r_diff.size);
+
+    result.size = result.capacity;
+
+    memcpy(result.data, l_diff.data, l_diff.size * sizeof(int));
+    memcpy(&result.data[l_diff.size], r_diff.data, r_diff.size * sizeof(int));
+
+    unordered_array_set_delete(l_diff);
+    unordered_array_set_delete(r_diff);
+
+    return result;
 }
+
+
+void unordered_array_set_delete(unordered_array_set set) {
+    free(set.data);
+}
+
 
 
 
