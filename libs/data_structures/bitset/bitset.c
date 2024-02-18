@@ -69,4 +69,6 @@ void bitset_print(bitset set) {
         if (bitset_in(set, elem_of_sequence))
             printf("%u ", elem_of_sequence);
     }
+
+    printf("\n");
 }
