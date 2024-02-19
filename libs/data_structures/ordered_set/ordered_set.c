@@ -62,7 +62,6 @@ bool ordered_array_set_isSubset(ordered_array_set_t subset,
         return 0;
 
     size_t matches = 0;
-    size_t j_lt = 0;
     for (size_t i = 0; i < subset.size; i++) {
         if (ordered_array_set_isValueIn(set, subset.data[i]))
             matches++;
