@@ -45,28 +45,24 @@ size_t ordered_array_set_ind(ordered_array_set_t *set, int value) {
     return binarySearch_(set->data, set->size, value);
 }
 
-
 bool ordered_array_set_isValueIn(ordered_array_set_t set, int value) {
     return ordered_array_set_ind(&set, value) != set.size;
 }
-
 
 bool ordered_array_set_isEqual(ordered_array_set_t set1, ordered_array_set_t set2) {
     if (set1.size != set2.size)
         return false;
 
-    for (size_t i = 0; i < set1.size; i++) {
-        if (set1.data[i] != set2.data[i])
-            return false;
-    }
-
-    return true;
+    return memcmp(set1.data, set2.data, set1.size) == 0;
 }
-
 
 bool ordered_array_set_isSubset(ordered_array_set_t subset,
                                 ordered_array_set_t set) {
+    if (subset.size > set.size)
+        return 0;
+
     size_t matches = 0;
+    size_t j_lt = 0;
     for (size_t i = 0; i < subset.size; i++) {
         if (ordered_array_set_isValueIn(set, subset.data[i]))
             matches++;
@@ -98,14 +94,12 @@ void ordered_array_set_insert(ordered_array_set_t *set, int value) {
     }
 }
 
-
 void ordered_array_set_deleteElement(ordered_array_set_t *set, int value) {
     size_t index_of_value = ordered_array_set_ind(set, value);
 
     if (index_of_value < set->size)
         deleteByIndexAndSaveOrder_(set->data, &set->size, index_of_value);
 }
-
 
 ordered_array_set_t ordered_array_set_union(ordered_array_set_t set1,
                                             ordered_array_set_t set2) {
