@@ -136,18 +136,94 @@ void test_ordered_array_set_intersection() {
 }
 
 
-void
+void test_ordered_array_set_difference() {
+    ordered_array_set_t op_1 = ordered_array_set_create_from_array(
+            (int[]) {1, 2, 3, 4}, 4);
+    ordered_array_set_t op_2 = ordered_array_set_create_from_array(
+            (int[]) {3, 4, 5, 6}, 4);
+    ordered_array_set_t verify_diff_1 = ordered_array_set_create_from_array(
+            (int[]) {1, 2}, 2);
+    ordered_array_set_t verify_diff_2 = ordered_array_set_create_from_array(
+            (int[]) {5, 6}, 2);
 
+    ordered_array_set_t test_diff_1 = ordered_array_set_difference(op_1, op_2);
+    ordered_array_set_t test_diff_2 = ordered_array_set_difference(op_2, op_1);
+
+    assert(ordered_array_set_isEqual(verify_diff_1, test_diff_1));
+    assert(ordered_array_set_isEqual(verify_diff_2, test_diff_2));
+
+    ordered_array_set_delete(op_1);
+    ordered_array_set_delete(op_2);
+    ordered_array_set_delete(verify_diff_1);
+    ordered_array_set_delete(test_diff_1);
+    ordered_array_set_delete(verify_diff_2);
+    ordered_array_set_delete(test_diff_2);
+}
+
+
+void test_ordered_array_set_symmetricDifference() {
+    ordered_array_set_t op_1 = ordered_array_set_create_from_array(
+            (int[]) {1, 2, 3, 4}, 4);
+    ordered_array_set_t op_2 = ordered_array_set_create_from_array(
+            (int[]) {3, 4, 5, 6}, 4);
+    ordered_array_set_t op_3 = ordered_array_set_create_from_array(
+            (int[]) {7, 8}, 2);
+    ordered_array_set_t verify_symDiff_1 = ordered_array_set_create_from_array(
+            (int[]) {1, 2, 5, 6}, 4);
+    ordered_array_set_t verify_symDiff_2 = ordered_array_set_create_from_array(
+            (int[]) {1, 2, 3, 4, 7, 8}, 6);
+
+    ordered_array_set_t test_symDiff_1 = ordered_array_set_symmetricDifference(op_1, op_2);
+    ordered_array_set_t test_symDiff_2 = ordered_array_set_symmetricDifference(op_1, op_3);
+
+    assert(ordered_array_set_isEqual(verify_symDiff_1, test_symDiff_1));
+    assert(ordered_array_set_isEqual(verify_symDiff_2, test_symDiff_2));
+
+    ordered_array_set_delete(op_1);
+    ordered_array_set_delete(op_2);
+    ordered_array_set_delete(op_3);
+    ordered_array_set_delete(verify_symDiff_1);
+    ordered_array_set_delete(test_symDiff_1);
+    ordered_array_set_delete(verify_symDiff_2);
+    ordered_array_set_delete(test_symDiff_2);
+}
+
+void test_ordered_array_set_complement() {
+    ordered_array_set_t set_1 = ordered_array_set_create_from_array(
+            (int[]) {1, 2, 3, 4}, 4);
+    ordered_array_set_t set_2 = ordered_array_set_create(4);
+    ordered_array_set_t universum_set = ordered_array_set_create_from_array(
+            (int[]) {1, 2, 3, 4, 5, 6, 7,8}, 8);
+    ordered_array_set_t verify_comp_1 = ordered_array_set_create_from_array(
+            (int[]) {5, 6, 7, 8}, 4);
+    ordered_array_set_t verify_comp_2 = universum_set;
+
+    ordered_array_set_t test_symDiff_1 = ordered_array_set_complement(set_1, universum_set);
+    ordered_array_set_t test_symDiff_2 = ordered_array_set_complement(set_2, universum_set);
+
+    assert(ordered_array_set_isEqual(verify_comp_1, test_symDiff_1));
+    assert(ordered_array_set_isEqual(verify_comp_2, test_symDiff_2));
+
+    ordered_array_set_delete(set_1);
+    ordered_array_set_delete(set_2);
+    ordered_array_set_delete(universum_set);
+    ordered_array_set_delete(verify_comp_1);
+    ordered_array_set_delete(test_symDiff_1);
+    ordered_array_set_delete(test_symDiff_2);
+}
 
 
 void tests() {
-//    test_ordered_array_set_create_from_array();
-//    test_ordered_array_ind();
-//    test_ordered_array_isEqual();
-//    test_ordered_array_set_isAbleAppend();
-//    test_ordered_array_set_insert();
-//    test_ordered_array_set_union();
+    test_ordered_array_set_create_from_array();
+    test_ordered_array_ind();
+    test_ordered_array_isEqual();
+    test_ordered_array_set_isAbleAppend();
+    test_ordered_array_set_insert();
+    test_ordered_array_set_union();
     test_ordered_array_set_intersection();
+    test_ordered_array_set_difference();
+    test_ordered_array_set_symmetricDifference();
+    test_ordered_array_set_complement();
 }
 
 int main() {
