@@ -8,7 +8,7 @@
 #include <memory.h>
 #include <stdio.h>
 #include <stdbool.h>
-#include "C:\Users\пашк\Desktop\лабы\основы алг и проги\clion\course\libs\algorithms\array\array.h"
+#include "K:\clion\course\libs\algorithms\array\array.h"
 
 
 typedef struct ordered_array_set {
