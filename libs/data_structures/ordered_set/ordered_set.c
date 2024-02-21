@@ -134,6 +134,9 @@ ordered_array_set_t ordered_array_set_intersection(ordered_array_set_t set1,
 
 ordered_array_set_t ordered_array_set_difference(ordered_array_set_t set1,
                                                  ordered_array_set_t set2) {
+    if (set2.size == 0)
+        return set1;
+
     ordered_array_set_t result = ordered_array_set_create(set1.size);
 
     for (size_t i = 0; i < set1.size; i++) {
