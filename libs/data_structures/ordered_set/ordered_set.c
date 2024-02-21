@@ -119,14 +119,14 @@ ordered_array_set_t ordered_array_set_union(ordered_array_set_t set1,
 
 ordered_array_set_t ordered_array_set_intersection(ordered_array_set_t set1,
                                                    ordered_array_set_t set2) {
-
     ordered_array_set_t result = ordered_array_set_create(set1.size);
     for (size_t i = 0; i < set1.size; i++) {
         if (ordered_array_set_isValueIn(set2, set1.data[i]))
             ordered_array_set_insert(&result, set1.data[i]);
     }
 
-    ordered_array_set_shrinkToFit(&result);
+    if (result.size)
+        ordered_array_set_shrinkToFit(&result);
 
     return result;
 }

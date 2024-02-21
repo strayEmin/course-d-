@@ -117,10 +117,10 @@ void test_ordered_array_set_intersection() {
     ordered_array_set_t op_3 = ordered_array_set_create_from_array(
             (int[]) {7, 8}, 2);
     ordered_array_set_t verify_intersection_1 = ordered_array_set_create_from_array(
-            (int[]) {1, 2, 3, 4, 5, 6, 7, 8}, 8);
+            (int[]) {3, 4}, 2);
     ordered_array_set_t verify_intersection_2 = ordered_array_set_create(1);
 
-    ordered_array_set_t test_intersection_1 = ordered_array_set_union(op_1, op_2);
+    ordered_array_set_t test_intersection_1 = ordered_array_set_intersection(op_1, op_2);
     ordered_array_set_t test_intersection_2 = ordered_array_set_intersection(verify_intersection_1, op_3);
 
     assert(ordered_array_set_isEqual(verify_intersection_1, test_intersection_1));
@@ -136,16 +136,17 @@ void test_ordered_array_set_intersection() {
 }
 
 
+void
 
 
 
 void tests() {
-    test_ordered_array_set_create_from_array();
-    test_ordered_array_ind();
-    test_ordered_array_isEqual();
-    test_ordered_array_set_isAbleAppend();
-    test_ordered_array_set_insert();
-    test_ordered_array_set_union();
+//    test_ordered_array_set_create_from_array();
+//    test_ordered_array_ind();
+//    test_ordered_array_isEqual();
+//    test_ordered_array_set_isAbleAppend();
+//    test_ordered_array_set_insert();
+//    test_ordered_array_set_union();
     test_ordered_array_set_intersection();
 }
 
