@@ -1,7 +1,7 @@
 //изменить по надобности действие при ошибке выделения памяти
 
-#ifndef CODE_UNORDERED_SET_H
-#define CODE_UNORDERED_SET_H
+#ifndef COURSE_UNORDERED_SET_H
+#define COURSE_UNORDERED_SET_H
 
 
 #include <stdint.h>
@@ -101,4 +101,4 @@ void unordered_array_set_print(unordered_array_set_t set);
 // освобождает память, занимаемую множеством set
 void unordered_array_set_delete(unordered_array_set_t set);
 
-#endif //CODE_UNORDERED_SET_H
+#endif //COURSE_UNORDERED_SET_H

@@ -1,5 +1,5 @@
-#ifndef CODE_BITSET_H
-#define CODE_BITSET_H
+#ifndef COURSE_BITSET_H
+#define COURSE_BITSET_H
 
 #include <stdint.h>
 #include <stdio.h>
@@ -50,4 +50,4 @@ bitset bitset_complement(bitset set);
 void bitset_print(bitset set);
 
 
-#endif //CODE_BITSET_H
+#endif //COURSE_BITSET_H

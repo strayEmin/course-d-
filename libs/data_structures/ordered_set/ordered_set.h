@@ -1,5 +1,5 @@
-#ifndef CODE_ORDERED_SET_H
-#define CODE_ORDERED_SET_H
+#ifndef COURSE_ORDERED_SET_H
+#define COURSE_ORDERED_SET_H
 
 
 #include <stdint.h>
@@ -80,4 +80,4 @@ void ordered_array_set_print(ordered_array_set_t set);
 void ordered_array_set_delete(ordered_array_set_t set);
 
 
-#endif //CODE_ORDERED_SET_H
+#endif //COURSE_ORDERED_SET_H
