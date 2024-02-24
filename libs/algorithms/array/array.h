@@ -1,8 +1,10 @@
 #ifndef CODE_ARRAY_H
 #define CODE_ARRAY_H
 
-#include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
+#include <stdio.h>
+#include <math.h>
 
 // осуществляет ввод массива arr размера size
 void inputArray_(int arr[], size_t size);
