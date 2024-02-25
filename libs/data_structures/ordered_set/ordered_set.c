@@ -152,15 +152,11 @@ ordered_array_set_t ordered_array_set_difference(ordered_array_set_t set1,
 
 ordered_array_set_t ordered_array_set_symmetricDifference(ordered_array_set_t set1,
                                                           ordered_array_set_t set2) {
+
     ordered_array_set_t l_diff = ordered_array_set_difference(set1, set2);
     ordered_array_set_t r_diff = ordered_array_set_difference(set2, set1);
 
-    ordered_array_set_t result = ordered_array_set_create(l_diff.size + r_diff.size);
-
-    result.size = result.capacity;
-
-    memcpy(result.data, l_diff.data, l_diff.size * sizeof(int));
-    memcpy(&result.data[l_diff.size], r_diff.data, r_diff.size * sizeof(int));
+    ordered_array_set_t result = ordered_array_set_union(l_diff, r_diff);
 
     ordered_array_set_delete(l_diff);
     ordered_array_set_delete(r_diff);
