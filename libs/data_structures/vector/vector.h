@@ -1,0 +1,4 @@
+#ifndef COURSE_VECTOR_H
+#define COURSE_VECTOR_H
+
+#endif //COURSE_VECTOR_H
