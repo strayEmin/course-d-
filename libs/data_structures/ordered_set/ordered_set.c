@@ -2,8 +2,8 @@
 
 
 ordered_array_set_t ordered_array_set_create(size_t capacity) {
-    int *data = malloc(sizeof(int) * capacity);
-    if (data == NULL) {
+    int *data = (int *) malloc(sizeof(int) * capacity);
+    if (data == NULL && capacity != 0) {
         fprintf(stderr, "Fail memory allocated in unordered_array_set_create.\n"
                         "File: .../libs/data_structures/ordered_set/ordered_set.h");
         exit(-1);
@@ -20,7 +20,7 @@ ordered_array_set_t ordered_array_set_create(size_t capacity) {
 void ordered_array_set_shrinkToFit(ordered_array_set_t *set) {
     if (set->size != set->capacity) {
         set->data = (int *) realloc(set->data, sizeof(int) * set->size);
-        if (set->data == NULL) {
+        if (set->data == NULL && set->size != 0) {
             fprintf(stderr, "Fail memory allocated in ordered_array_set_shrinkToFit\n"
                             "File: .../libs/data_structures/ordered_set/ordered_set.h");
             exit(-1);
