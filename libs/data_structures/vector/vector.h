@@ -14,20 +14,10 @@ typedef struct vector {
 } vector_t;
 
 // возвращает вектор вместимости capacity и размером size 0
-vector_t createVector(size_t capacity) {
-    int *data = (int *) malloc(capacity * sizeof(int));
-    if (data == NULL && capacity != 0) {
-        fprintf(stderr, "Fail memory allocated in vectorCreate\n");
-        exit(1);
-    }
+vector_t createVector(size_t capacity);
 
-    return (vector_t) {
-        data,
-        0,
-        capacity
-    };
-}
-
+// изменяет количество памяти, выделенное под хранение элементов вектора
+void reserve(vector_t *v, size_t new_capacity);
 
 
 
