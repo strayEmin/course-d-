@@ -1,5 +1,6 @@
 #include "vector.h"
 
+
 vector_t createVector(size_t capacity) {
     int *data = NULL;
     if (capacity != 0) {
@@ -16,6 +17,7 @@ vector_t createVector(size_t capacity) {
         capacity
     };
 }
+
 
 void reserve(vector_t *v, size_t new_capacity) {
     v->capacity = new_capacity;
@@ -35,3 +37,16 @@ void reserve(vector_t *v, size_t new_capacity) {
         v->size = v->capacity;
 }
 
+
+void clear(vector_t *v) {
+    v->size = 0;
+}
+
+
+void shrinkToFit(vector_t *v) {
+    reserve(v, v->size);
+}
+
+void deleteVector(vector_t *v) {
+    reserve(v, 0);
+}
