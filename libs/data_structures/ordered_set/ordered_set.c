@@ -172,6 +172,9 @@ void ordered_array_set_print(ordered_array_set_t set) {
     outputArray_(set.data, set.size);
 }
 
-void ordered_array_set_delete(ordered_array_set_t set) {
-    free(set.data);
+void ordered_array_set_delete(ordered_array_set_t *set) {
+    free(set->data);
+    set->data = NULL;
+    set->capacity = 0;
+    set->size = 0;
 }

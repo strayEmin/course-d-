@@ -99,6 +99,6 @@ unordered_array_set_t unordered_array_set_symmetricDifference(
 void unordered_array_set_print(unordered_array_set_t set);
 
 // освобождает память, занимаемую множеством set
-void unordered_array_set_delete(unordered_array_set_t set);
+void unordered_array_set_delete(unordered_array_set_t *set);
 
 #endif //COURSE_UNORDERED_SET_H

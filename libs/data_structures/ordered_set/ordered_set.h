@@ -77,7 +77,7 @@ ordered_array_set_t ordered_array_set_complement(ordered_array_set_t set,
 void ordered_array_set_print(ordered_array_set_t set);
 
 // освобождает память, занимаемую множеством set
-void ordered_array_set_delete(ordered_array_set_t set);
+void ordered_array_set_delete(ordered_array_set_t *set);
 
 
 #endif //COURSE_ORDERED_SET_H

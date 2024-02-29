@@ -172,8 +172,11 @@ void unordered_array_set_print(unordered_array_set_t set) {
 }
 
 
-void unordered_array_set_delete(unordered_array_set_t set) {
-    free(set.data);
+void unordered_array_set_delete(unordered_array_set_t *set) {
+    free(set->data);
+    set->data = NULL;
+    set->capacity = 0;
+    set->size = 0;
 }
 
 
