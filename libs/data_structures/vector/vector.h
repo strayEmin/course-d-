@@ -2,6 +2,7 @@
 #define COURSE_VECTOR_H
 
 #include <stdlib.h>
+#include <assert.h>
 #include <stdio.h>
 #include <stdbool.h>
 #include <memory.h>
@@ -29,6 +30,19 @@ void shrinkToFit(vector_t *v);
 // размеру и вместимости size и capacity соответственно нули
 void deleteVector(vector_t *v);
 
+// возвращает true, если вектор пуст, иначе false
+bool isEmpty(vector_t v);
 
+// возвращает true, если вектор заполнен, иначе false
+bool isFull(vector_t v);
+
+// которая возвращает i-ый элемент вектора v
+int getVectorValue(vector_t v, size_t i);
+
+// добавляет элемент x в конец вектора v
+void pushBack(vector_t *v, int x);
+
+// удаляет последний элемент вектора
+void popBack(vector_t *v);
 
 #endif //COURSE_VECTOR_H
