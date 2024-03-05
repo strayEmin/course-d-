@@ -156,8 +156,8 @@ ordered_array_set_t ordered_array_set_symmetricDifference(ordered_array_set_t se
 
     ordered_array_set_t result = ordered_array_set_union(l_diff, r_diff);
 
-    ordered_array_set_delete(l_diff);
-    ordered_array_set_delete(r_diff);
+    ordered_array_set_delete(&l_diff);
+    ordered_array_set_delete(&r_diff);
 
     return result;
 }

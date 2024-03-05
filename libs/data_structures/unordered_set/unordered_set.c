@@ -160,8 +160,8 @@ unordered_array_set_t unordered_array_set_symmetricDifference(unordered_array_se
     memcpy(result.data, l_diff.data, l_diff.size * sizeof(int));
     memcpy(&result.data[l_diff.size], r_diff.data, r_diff.size * sizeof(int));
 
-    unordered_array_set_delete(l_diff);
-    unordered_array_set_delete(r_diff);
+    unordered_array_set_delete(&l_diff);
+    unordered_array_set_delete(&r_diff);
 
     return result;
 }
