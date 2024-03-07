@@ -45,4 +45,13 @@ void pushBack(vector_t *v, int x);
 // удаляет последний элемент вектора
 void popBack(vector_t *v);
 
+// возвращает указатель на index-ый элемент вектора, а в случае если элемента с таким индексом
+// не существует - NULL
+int *atVector(vector_t *v, size_t index);
+
+
+
+// осуществляет вывод вектора в консоль
+void printVector(vector_t v);
+
 #endif //COURSE_VECTOR_H

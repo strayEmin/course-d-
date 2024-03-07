@@ -19,6 +19,7 @@ vector_t createVector(size_t capacity) {
 }
 
 
+
 void reserve(vector_t *v, size_t new_capacity) {
     v->capacity = new_capacity;
 
@@ -73,11 +74,14 @@ int getVectorValue(vector_t v, size_t i) {
 
 
 void pushBack(vector_t *v, int x) {
-    if (isFull(*v))
-        reserve(v, v->capacity * 2 ? v->capacity != 0 : 1);
+    if (isFull(*v)) {
+        if (v->capacity == 0)
+            reserve(v, v->capacity + 1);
+        else
+            reserve(v, v->capacity * 2);
+    }
 
-    v->data[v->size] = x;
-    v->size++;
+    v->data[v->size++] = x;
 }
 
 
@@ -85,7 +89,34 @@ void popBack(vector_t *v) {
     if (isEmpty(*v)) {
         fprintf(stderr, "Error: the vector is empty, it is impossible to delete the last element\n");
         exit(1);
+    } else
+        v->size--;
+}
+
+
+int *atVector(vector_t *v, size_t index) {
+    if (index >= v->size) {
+        fprintf(stderr, "IndexError: a[%llu] is not exists", index);
+        return NULL;
     }
-    if (--v->size <= v->capacity / 2)
-        reserve(v, v->capacity / 2);
+
+    return &v->data[index];
+}
+
+
+int *back(vector_t *v) {
+    return &v->data[v->size - 1];
+}
+
+
+int *front(vector_t *v) {
+    return &v->data[0];
+}
+
+
+
+
+
+void printVector(vector_t v) {
+    outputArray_(v.data, v.size);
 }
