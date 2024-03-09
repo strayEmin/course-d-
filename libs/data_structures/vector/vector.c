@@ -110,11 +110,8 @@ int *back(vector_t *v) {
 
 
 int *front(vector_t *v) {
-    return &v->data[0];
+    return v->data;
 }
-
-
-
 
 
 void printVector(vector_t v) {
