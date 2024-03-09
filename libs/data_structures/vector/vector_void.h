@@ -32,5 +32,33 @@ void shrinkToFitV(vector_void_t *v);
 // размеру и вместимости size и capacity соответственно нули
 void deleteVectorV(vector_void_t *v);
 
+// возвращает true, если вектор пуст, иначе false
+bool isEmptyV(vector_void_t v);
+
+// возвращает true, если вектор заполнен, иначе false
+bool isFullV(vector_void_t v);
+
+// записывает по адресу destination i-ый элемент вектора v
+void getVectorValueV(vector_void_t v, size_t i, void *destination);
+
+// добавляет элемент по указателю *x в конец вектора v
+void pushBackV(vector_void_t *v, void *x);
+
+// удаляет последний элемент вектора
+void popBackV(vector_void_t *v);
+
+// возвращает указатель на index-ый элемент вектора, а в случае если элемента с таким индексом
+// не существует - NULL
+int *atVectorV(vector_void_t *v, size_t index);
+
+// возвращает указатель на последний элемент вектора
+int *backV(vector_void_t *v);
+
+// возвращает указатель на нулевой элемент вектора
+int *frontV(vector_void_t *v);
+
+// осуществляет вывод вектора в консоль
+void printVectorV(vector_void_t v);
+
 
 #endif //COURSE_VECTOR_VOID_H

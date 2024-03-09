@@ -52,3 +52,44 @@ void shrinkToFitV(vector_void_t *v) {
 void deleteVectorV(vector_void_t *v) {
     reserveV(v, 0);
 }
+
+
+bool isEmptyV(vector_void_t v) {
+    return v.size == 0;
+}
+
+
+bool isFullV(vector_void_t v) {
+    return v.size == v.capacity;
+}
+
+
+void getVectorValueV(vector_void_t v, size_t i, void *destination) {
+    if (i >= v.size ) {
+        fprintf(stderr, "Access error: going beyond the vector\n");
+        exit(1);
+    }
+
+    char *source = (char *) v.data + i * v.base_type_size;
+    memcpy(destination, source, v.base_type_size);
+}
+
+
+void pushBackV(vector_void_t *v, void *px) {
+    if (isFullV(*v)) {
+        if (v->capacity == 0)
+            reserveV(v, v->capacity + 1);
+        else
+            reserveV(v, v->capacity * 2);
+    }
+    char *destination = (char *) v->data + v->size++ * v->base_type_size;
+    memcpy(destination, px, v->base_type_size);
+}
+
+void popBackV(vector_void_t *v) {
+    if (isEmptyV(*v)) {
+        fprintf(stderr, "Error: the vector is empty, it is impossible to delete the last element\n");
+        exit(1);
+    } else
+        v->size--;
+}
