@@ -4,4 +4,5 @@ add_library(data_structures
         ordered_set/ordered_set.c
         vector/vector.c
         vector/vector_void.c
+        matrix/matrix.c
 )
