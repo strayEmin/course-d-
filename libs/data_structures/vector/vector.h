@@ -49,7 +49,11 @@ void popBack(vector_t *v);
 // не существует - NULL
 int *atVector(vector_t *v, size_t index);
 
+// возвращает указатель на последний элемент вектора
+int *back(vector_t *v);
 
+// возвращает указатель на нулевой элемент вектора
+int *front(vector_t *v);
 
 // осуществляет вывод вектора в консоль
 void printVector(vector_t v);
