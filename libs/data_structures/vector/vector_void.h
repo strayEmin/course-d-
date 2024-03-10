@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <memory.h>
+#include <windows.h>
 #include "../../algorithms/array/array.h"
 
 typedef struct vector_void {
@@ -56,9 +57,6 @@ int *backV(vector_void_t *v);
 
 // возвращает указатель на нулевой элемент вектора
 int *frontV(vector_void_t *v);
-
-// осуществляет вывод вектора в консоль
-void printVectorV(vector_void_t v);
 
 
 #endif //COURSE_VECTOR_VOID_H
