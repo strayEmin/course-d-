@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <memory.h>
+#include <windows.h>
 #include "../../algorithms/array/array.h"
 
 typedef struct vector {
