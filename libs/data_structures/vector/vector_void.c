@@ -6,7 +6,7 @@ vector_void_t createVectorV(size_t capacity, size_t base_type_size) {
     if (capacity != 0) {
         data = malloc(capacity * base_type_size);
         if (data == NULL) {
-            MessageBox(GetActiveWindow(), "Fail memory allocated", "main", MB_ICONERROR);
+            MessageBox(GetActiveWindow(), "Fail memory allocated", "createVectorV", MB_ICONERROR);
             exit(1);
         }
     }
@@ -29,7 +29,7 @@ void reserveV(vector_void_t *v, size_t new_capacity) {
     } else {
         v->data = realloc(v->data, v->capacity * v->base_type_size);
         if (v->data == NULL) {
-            MessageBox(GetActiveWindow(), "Fail memory allocated", "main", MB_ICONERROR);
+            MessageBox(GetActiveWindow(), "Fail memory allocated", "reserveV", MB_ICONERROR);
             exit(1);
         }
     }
@@ -66,7 +66,7 @@ bool isFullV(vector_void_t v) {
 
 void getVectorValueV(vector_void_t v, size_t i, void *destination) {
     if (i >= v.size ) {
-        MessageBox(GetActiveWindow(), "Access error: going beyond the vector", "main", MB_ICONERROR);
+        MessageBox(GetActiveWindow(), "Access error: going beyond the vector", "getVectorValueV", MB_ICONERROR);
         exit(1);
     }
 
@@ -90,7 +90,7 @@ void popBackV(vector_void_t *v) {
     if (isEmptyV(*v)) {
         MessageBox(GetActiveWindow(),
                    "Error: the vector is empty, it is impossible to delete the last element",
-                   "main", MB_ICONERROR);
+                   "popBackV", MB_ICONERROR);
         exit(1);
     } else
         v->size--;
