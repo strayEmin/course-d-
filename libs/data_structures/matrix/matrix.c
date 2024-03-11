@@ -41,19 +41,57 @@ void freeMemMatrix(matrix_t *m) {
     for (; m->n_rows > 0; m->n_rows--) {
         free(m->values[m->n_rows - 1]);
     }
+
     m->n_cols = 0;
     free(m->values);
     m->values = NULL;
 }
 
 
-void freeMemMatrices(matrix_t *ms, int n_matrices) {
+void freeMemMatrices(matrix_t *ms, size_t n_matrices) {
     for (size_t i = 0; i < n_matrices; i++) {
         freeMemMatrix(&ms[i]);
     }
+
     free(ms);
     ms = NULL;
 }
+
+
+void inputMatrix(matrix_t *m) {
+    for (size_t i = 0; i < m->n_rows; i++)
+        for (size_t j = 0; j < m->n_cols; j++)
+            scanf("%d", &m->values[i][j]);
+}
+
+
+void inputMatrices(matrix_t *ms, size_t n_matrices) {
+    for (size_t i = 0; i < n_matrices; i++)
+        inputMatrix(&ms[i]);
+}
+
+
+void outputMatrix(matrix_t m) {
+    for (size_t i = 0; i < m.n_rows; i++) {
+        printf("[%d", m.values[i][0]);
+        for (size_t j = 1; j < m.n_cols; j++)
+            printf(", %d", m.values[i][j]);
+        printf("]\n");
+    }
+}
+
+
+void outputMatrices(matrix_t *ms, size_t n_matrices) {
+    for (size_t i = 0; i < n_matrices; i++) {
+        printf("%d elem:\n");
+        outputMatrix(ms[i]);
+    }
+}
+
+
+
+
+
 
 
 

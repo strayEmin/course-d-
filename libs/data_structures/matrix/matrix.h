@@ -34,19 +34,19 @@ matrix_t *getMemArrayOfMatrices(size_t n_matrices, size_t n_rows, size_t n_cols)
 void freeMemMatrix(matrix_t *m);
 
 // освобождает память, выделенную под хранение массива ms из nMatrices матриц.
-void freeMemMatrices(matrix_t *ms, int n_matrices);
+void freeMemMatrices(matrix_t *ms, size_t n_matrices);
 
 // ввод матрицы m
 void inputMatrix(matrix_t *m);
 
 // ввод массива из nMatrices матриц, хранящейся по адресу ms
-void inputMatrices(matrix_t *ms, int nMatrices);
+void inputMatrices(matrix_t *ms, size_t n_matrices);
 
 // вывод матрицы m
 void outputMatrix(matrix_t m);
 
 // – вывод массива из nMatrices матриц, хранящейся по адресу ms.
-void outputMatrices(matrix_t *ms, int n_matrices);
+void outputMatrices(matrix_t *ms, size_t n_matrices);
 
 
 #endif //COURSE_MATRIX_H
