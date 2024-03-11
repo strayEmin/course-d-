@@ -83,7 +83,7 @@ void outputMatrix(matrix_t m) {
 
 void outputMatrices(matrix_t *ms, size_t n_matrices) {
     for (size_t i = 0; i < n_matrices; i++) {
-        printf("%d elem:\n");
+        printf("%zu elem:\n", i);
         outputMatrix(ms[i]);
     }
 }
