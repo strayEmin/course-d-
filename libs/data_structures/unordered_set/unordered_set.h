@@ -1,7 +1,7 @@
 //изменить по надобности действие при ошибке выделения памяти
 
-#ifndef CODE_UNORDERED_SET_H
-#define CODE_UNORDERED_SET_H
+#ifndef COURSE_UNORDERED_SET_H
+#define COURSE_UNORDERED_SET_H
 
 
 #include <stdint.h>
@@ -10,7 +10,7 @@
 #include <memory.h>
 #include <stdio.h>
 #include <stdbool.h>
-#include "C:\Users\пашк\Desktop\лабы\основы алг и проги\clion\course\libs\algorithms\array\array.h"
+#include "../../algorithms/array/array.h"
 
 typedef struct unordered_array_set {
     int *data; // элементы множества
@@ -99,6 +99,6 @@ unordered_array_set_t unordered_array_set_symmetricDifference(
 void unordered_array_set_print(unordered_array_set_t set);
 
 // освобождает память, занимаемую множеством set
-void unordered_array_set_delete(unordered_array_set_t set);
+void unordered_array_set_delete(unordered_array_set_t *set);
 
-#endif //CODE_UNORDERED_SET_H
+#endif //COURSE_UNORDERED_SET_H

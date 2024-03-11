@@ -2,11 +2,10 @@
 
 
 ordered_array_set_t ordered_array_set_create(size_t capacity) {
-    int *data = malloc(sizeof(int) * capacity);
-    if (data == NULL) {
-        fprintf(stderr, "Fail memory allocated in unordered_array_set_create.\n"
-                        "File: .../libs/data_structures/ordered_set/ordered_set.h");
-        exit(-1);
+    int *data = (int *) malloc(sizeof(int) * capacity);
+    if (data == NULL && capacity != 0) {
+        fprintf(stderr, "Fail memory allocated in unordered_array_set_create.\n");
+        exit(1);
     }
 
     return (ordered_array_set_t) {
@@ -20,10 +19,9 @@ ordered_array_set_t ordered_array_set_create(size_t capacity) {
 void ordered_array_set_shrinkToFit(ordered_array_set_t *set) {
     if (set->size != set->capacity) {
         set->data = (int *) realloc(set->data, sizeof(int) * set->size);
-        if (set->data == NULL) {
-            fprintf(stderr, "Fail memory allocated in ordered_array_set_shrinkToFit\n"
-                            "File: .../libs/data_structures/ordered_set/ordered_set.h");
-            exit(-1);
+        if (set->data == NULL && set->size != 0) {
+            fprintf(stderr, "Fail memory allocated in ordered_array_set_shrinkToFit\n");
+            exit(1);
         }
         set->capacity = set->size;
     }
@@ -119,14 +117,14 @@ ordered_array_set_t ordered_array_set_union(ordered_array_set_t set1,
 
 ordered_array_set_t ordered_array_set_intersection(ordered_array_set_t set1,
                                                    ordered_array_set_t set2) {
-
     ordered_array_set_t result = ordered_array_set_create(set1.size);
     for (size_t i = 0; i < set1.size; i++) {
         if (ordered_array_set_isValueIn(set2, set1.data[i]))
             ordered_array_set_insert(&result, set1.data[i]);
     }
 
-    ordered_array_set_shrinkToFit(&result);
+    if (result.size)
+        ordered_array_set_shrinkToFit(&result);
 
     return result;
 }
@@ -134,6 +132,9 @@ ordered_array_set_t ordered_array_set_intersection(ordered_array_set_t set1,
 
 ordered_array_set_t ordered_array_set_difference(ordered_array_set_t set1,
                                                  ordered_array_set_t set2) {
+    if (set2.size == 0)
+        return set1;
+
     ordered_array_set_t result = ordered_array_set_create(set1.size);
 
     for (size_t i = 0; i < set1.size; i++) {
@@ -149,18 +150,14 @@ ordered_array_set_t ordered_array_set_difference(ordered_array_set_t set1,
 
 ordered_array_set_t ordered_array_set_symmetricDifference(ordered_array_set_t set1,
                                                           ordered_array_set_t set2) {
+
     ordered_array_set_t l_diff = ordered_array_set_difference(set1, set2);
     ordered_array_set_t r_diff = ordered_array_set_difference(set2, set1);
 
-    ordered_array_set_t result = ordered_array_set_create(l_diff.size + r_diff.size);
+    ordered_array_set_t result = ordered_array_set_union(l_diff, r_diff);
 
-    result.size = result.capacity;
-
-    memcpy(result.data, l_diff.data, l_diff.size * sizeof(int));
-    memcpy(&result.data[l_diff.size], r_diff.data, r_diff.size * sizeof(int));
-
-    ordered_array_set_delete(l_diff);
-    ordered_array_set_delete(r_diff);
+    ordered_array_set_delete(&l_diff);
+    ordered_array_set_delete(&r_diff);
 
     return result;
 }
@@ -175,6 +172,9 @@ void ordered_array_set_print(ordered_array_set_t set) {
     outputArray_(set.data, set.size);
 }
 
-void ordered_array_set_delete(ordered_array_set_t set) {
-    free(set.data);
+void ordered_array_set_delete(ordered_array_set_t *set) {
+    free(set->data);
+    set->data = NULL;
+    set->capacity = 0;
+    set->size = 0;
 }

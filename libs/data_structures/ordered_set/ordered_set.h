@@ -1,5 +1,5 @@
-#ifndef CODE_ORDERED_SET_H
-#define CODE_ORDERED_SET_H
+#ifndef COURSE_ORDERED_SET_H
+#define COURSE_ORDERED_SET_H
 
 
 #include <stdint.h>
@@ -8,7 +8,7 @@
 #include <memory.h>
 #include <stdio.h>
 #include <stdbool.h>
-#include "C:\Users\пашк\Desktop\лабы\основы алг и проги\clion\course\libs\algorithms\array\array.h"
+#include "../../algorithms/array/array.h"
 
 
 typedef struct ordered_array_set {
@@ -77,7 +77,7 @@ ordered_array_set_t ordered_array_set_complement(ordered_array_set_t set,
 void ordered_array_set_print(ordered_array_set_t set);
 
 // освобождает память, занимаемую множеством set
-void ordered_array_set_delete(ordered_array_set_t set);
+void ordered_array_set_delete(ordered_array_set_t *set);
 
 
-#endif //CODE_ORDERED_SET_H
+#endif //COURSE_ORDERED_SET_H

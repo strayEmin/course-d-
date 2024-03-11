@@ -1,7 +1,3 @@
-#include <stdlib.h>
-#include <stdbool.h>
-#include <stdio.h>
-#include <math.h>
 #include "array.h"
 
 void inputArray_(int arr[], size_t size) {
@@ -227,12 +223,13 @@ void deleteIf_(int *const a, size_t *const n, int (*deletePredicate)(int)) {
 }
 
 size_t binarySearch_(const int *a, size_t n, int x) {
-    if (n == 0)
+    if (n == 0 || a[0] > x || a[n - 1] < x)
         return n;
-    size_t left = 0;
-    size_t right = n - 1;
+    size_t left, right;
+    left = 0;
+    right = n - 1;
     while (left <= right) {
-        size_t middle = left + (right - left) / 2;
+        int middle = left + (right - left) / 2;
         if (a[middle] < x)
             left = middle + 1;
         else if (a[middle] > x)
