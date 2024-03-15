@@ -88,11 +88,105 @@ void outputMatrices(matrix_t *ms, size_t n_matrices) {
     }
 }
 
+void swapRows(matrix_t m, size_t i1, size_t i2) {
+    if (i1 >= m.n_rows || i2 >= m.n_rows) {
+        fprintf(stderr, "Access error: going beyond the matrix");
+        exit(1);
+    }
+
+    int *temp = m.values[i1];
+    m.values[i1] = m.values[i2];
+    m.values[i2] = temp;
+}
 
 
+void swapColumns(matrix_t m, size_t j1, size_t j2) {
+    if (j1 >= m.n_cols || j2 >= m.n_cols) {
+        fprintf(stderr, "Access error: going beyond the matrix");
+        exit(1);
+    }
+
+    for (size_t i = 0; i < m.n_rows; i++) {
+        int temp = m.values[i][j1];
+        m.values[i][j1] = m.values[i][j2];
+        m.values[i][j2] = temp;
+    }
+}
 
 
+static int *getArrRowsNumByCriteria(matrix_t m, int (*criteria)(int*, size_t)) {
+    int *res = (int *) malloc(sizeof(int) * m.n_rows);
+    memAllocFailProcess_(res, "getArrRowsNumByCriteria");
 
+    for (size_t i = 0; i < m.n_cols; i++) {
+        res[i] = criteria(m.values[i], m.n_cols);
+    }
+
+    return res;
+}
+
+
+void insertionSortRowsMatrixByRowCriteria(matrix_t m, int (*criteria)(int*, size_t)) {
+    int *rows_num_by_criteria = getArrRowsNumByCriteria(m, criteria);
+
+    for (int i = 1; i < (int) (m.n_rows); i++) {
+        int sorted = i - 1;
+
+        while (sorted >= 0 && rows_num_by_criteria[sorted] > rows_num_by_criteria[sorted + 1]) {
+            swapRows(m, sorted, sorted + 1);
+            swap(rows_num_by_criteria, sorted, sorted + 1);
+            sorted--;
+        }
+    }
+
+    free(rows_num_by_criteria);
+}
+
+
+int *getColumn(matrix_t m, size_t index) {
+    int *column = (int *) malloc(sizeof(int) * m.n_rows);
+    memAllocFailProcess_(column, "getColumns");
+
+    for (size_t i = 0; i < m.n_rows; i++) {
+        column[i] = m.values[i][index];
+    }
+
+    return column;
+}
+
+
+static int *getArrColumnsNumByCriteria(matrix_t m, int (*criteria)(int*, size_t)) {
+    int *res = (int *) malloc(sizeof(int) * m.n_cols);
+    memAllocFailProcess_(res, "getArrColumnNumByCriteria");
+
+    for (size_t i = 0; i < m.n_cols; i++) {
+        int *column = getColumn(m, i);
+        res[i] = criteria(column, m.n_rows);
+        free(column);
+    }
+
+    return res;
+}
+
+
+void selectionSortColsMatrixByColCriteria(matrix_t m, int (*criteria)(int*, size_t)) {
+    for (size_t i = 0; i < m.n_cols - 1; i++) {
+        int *columns_num_by_criteria = getArrColumnsNumByCriteria(m, criteria);
+        size_t min_index = i;
+        int min_num_by_criteria = columns_num_by_criteria[min_index];
+
+        for (size_t j = i + 1; j < m.n_cols; j++)
+            if (columns_num_by_criteria[j] < min_num_by_criteria) {
+                min_index = j;
+                min_num_by_criteria = columns_num_by_criteria[j];
+            }
+
+        swapColumns(m, i, min_index);
+        swap(columns_num_by_criteria, i, min_index);
+
+        free(columns_num_by_criteria);
+    }
+}
 
 
 
