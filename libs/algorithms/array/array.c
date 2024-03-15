@@ -104,6 +104,12 @@ bool isPalindromeSequence_(const int *const a, const size_t n) {
     return true;
 }
 
+void swap(int arr[], size_t i1, size_t i2) {
+    int tmp =  arr[i1];
+    arr[i1] = arr[i2];
+    arr[i2] = tmp;
+}
+
 void selectionSortArray_(int *const a, const size_t n) {
     size_t min_elem_index;
     int tmp;
