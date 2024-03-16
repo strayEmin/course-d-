@@ -234,4 +234,29 @@ bool isSymmetricMatrix(matrix_t m) {
     return true;
 }
 
+// при всем уважении, но зачем писать две функции которые могут не отличаться в коде
+// абсолютно ничем, ну прям ну совсем?
+void transposeSquareMatrix(matrix_t *m) {
+    assert(isSquareMatrix(*m));
 
+    matrix_t tm = getMemMatrix(m->n_rows, m->n_cols);
+
+    for (size_t i = 0; i < m->n_rows; i++)
+        for (size_t j = 0; j < m->n_cols; j++)
+            tm.values[j][i] = m->values[i][j];
+
+    freeMemMatrix(m);
+    *m = tm;
+}
+
+
+void transposeMatrix(matrix_t *m) {
+    matrix_t tm = getMemMatrix(m->n_cols, m->n_rows);
+
+    for (size_t i = 0; i < m->n_rows; i++)
+        for (size_t j = 0; j < m->n_cols; j++)
+            tm.values[j][i] = m->values[i][j];
+
+    freeMemMatrix(m);
+    *m = tm;
+}

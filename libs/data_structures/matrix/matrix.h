@@ -79,5 +79,11 @@ bool isEMatrix(matrix_t m);
 // возвращает значение ’истина’, если матрица m является симметричной, ложь – в противном случае
 bool isSymmetricMatrix(matrix_t m);
 
+// транспонирует квадратную матрицу по указателю *m
+void transposeSquareMatrix(matrix_t *m);
+
+// транспонирует матрицу по указателю *m
+void transposeMatrix(matrix_t *m);
+
 
 #endif //COURSE_MATRIX_H
