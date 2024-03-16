@@ -181,12 +181,57 @@ void selectionSortColsMatrixByColCriteria(matrix_t m, int (*criteria)(int*, size
                 min_num_by_criteria = columns_num_by_criteria[j];
             }
 
-        swapColumns(m, i, min_index);
-        swap(columns_num_by_criteria, i, min_index);
+        if (min_index != i) {
+            swapColumns(m, i, min_index);
+            swap(columns_num_by_criteria, i, min_index);
+        }
 
         free(columns_num_by_criteria);
     }
 }
 
+// возвращает значение ’истина’, если
+// матрица m является квадратной, ложь – в противном случае
+bool isSquareMatrix(matrix_t m) {
+    return m.n_rows == m.n_cols;
+}
+
+
+bool areTwoMatricesEqual(matrix_t m1, matrix_t m2) {
+    if (m1.n_rows != m2.n_rows || m1.n_cols != m2.n_cols)
+        return false;
+
+    for (size_t i = 0; i < m1.n_rows; i++) {
+        if (memcmp(m1.values[i], m2.values[i], sizeof(int) * m1.n_cols) != 0)
+            return false;
+    }
+
+    return true;
+}
+
+bool isEMatrix(matrix_t m) {
+    if (!isSquareMatrix(m))
+        return false;
+
+    for (size_t i = 0; i < m.n_rows; i++)
+        for (size_t j = 0; j < m.n_cols; j++)
+            if (m.values[i][j] != (i==j))
+                return false;
+
+    return true;
+}
+
+
+bool isSymmetricMatrix(matrix_t m) {
+    if (!isSquareMatrix(m))
+        return false;
+
+    for (size_t i = 0; i < m.n_rows; i++)
+        for (size_t j = 0; j < m.n_cols; j++)
+            if (m.values[i][j] != m.values[j][i])
+                return false;
+
+    return true;
+}
 
 

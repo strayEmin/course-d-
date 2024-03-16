@@ -66,5 +66,18 @@ int *getColumn(matrix_t m, size_t index);
 // примененной к этим столбцам
 void selectionSortColsMatrixByColCriteria(matrix_t m, int (*criteria)(int*, size_t));
 
+// возвращает значение ’истина’, если
+// матрица m является квадратной, ложь – в противном случае
+bool isSquareMatrix(matrix_t m);
+
+//  возвращает значение ’истина’, если матрицы m1 и m2 равны, ложь – в противном случае
+bool areTwoMatricesEqual(matrix_t m1, matrix_t m2);
+
+// возвращает значение ’истина’, если матрица m является единичной, ложь – в противном случае
+bool isEMatrix(matrix_t m);
+
+// возвращает значение ’истина’, если матрица m является симметричной, ложь – в противном случае
+bool isSymmetricMatrix(matrix_t m);
+
 
 #endif //COURSE_MATRIX_H
