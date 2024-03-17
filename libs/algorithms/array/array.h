@@ -37,7 +37,7 @@ void expandArray_(int *const a, const size_t n);
 bool isPalindromeSequence_(const int *const a, const size_t n);
 
 // обменивает между собой два элемента массива по индексам
-void swap(int arr[], size_t i1, size_t i2);
+void swapElemArr(int arr[], size_t i1, size_t i2);
 
 // cортирует массив a размера n по возрастанию выбором
 void selectionSortArray_(int *const a, const size_t n);
