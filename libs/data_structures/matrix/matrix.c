@@ -134,7 +134,7 @@ void insertionSortRowsMatrixByRowCriteria(matrix_t m, int (*criteria)(int*, size
 
         while (sorted >= 0 && rows_num_by_criteria[sorted] > rows_num_by_criteria[sorted + 1]) {
             swapRows(m, sorted, sorted + 1);
-            swap(rows_num_by_criteria, sorted, sorted + 1);
+            swapElemArr(rows_num_by_criteria, sorted, sorted + 1);
             sorted--;
         }
     }
@@ -183,7 +183,7 @@ void selectionSortColsMatrixByColCriteria(matrix_t m, int (*criteria)(int*, size
 
         if (min_index != i) {
             swapColumns(m, i, min_index);
-            swap(columns_num_by_criteria, i, min_index);
+            swapElemArr(columns_num_by_criteria, i, min_index);
         }
 
         free(columns_num_by_criteria);
@@ -234,19 +234,20 @@ bool isSymmetricMatrix(matrix_t m) {
     return true;
 }
 
-// при всем уважении, но зачем писать две функции которые могут не отличаться в коде
-// абсолютно ничем, ну прям ну совсем?
+static void swap_(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+
 void transposeSquareMatrix(matrix_t *m) {
     assert(isSquareMatrix(*m));
 
-    matrix_t tm = getMemMatrix(m->n_rows, m->n_cols);
-
     for (size_t i = 0; i < m->n_rows; i++)
         for (size_t j = 0; j < m->n_cols; j++)
-            tm.values[j][i] = m->values[i][j];
-
-    freeMemMatrix(m);
-    *m = tm;
+            if (i <= j)
+                swap_(&m->values[j][i], &m->values[i][j]);
 }
 
 
@@ -259,4 +260,62 @@ void transposeMatrix(matrix_t *m) {
 
     freeMemMatrix(m);
     *m = tm;
+}
+
+
+position_t getMinValuePos(matrix_t m) {
+    position_t res;
+    int min_elem = INT_MAX;
+
+    for (size_t i = 0; i < m.n_rows; i++)
+        for (size_t j = 0; j < m.n_cols; j++)
+            if (m.values[i][j] < min_elem) {
+                res.row_index = i;
+                res.col_index = j;
+                min_elem = m.values[i][j];
+            }
+    return res;
+}
+
+
+position_t getMaxValuePos(matrix_t m) {
+    position_t res;
+    int max_elem = INT_MIN;
+
+    for (size_t i = 0; i < m.n_rows; i++)
+        for (size_t j = 0; j < m.n_cols; j++)
+            if (m.values[i][j] > max_elem) {
+                res.row_index = i;
+                res.col_index = j;
+                max_elem = m.values[i][j];
+            }
+
+    return res;
+}
+
+
+matrix_t createMatrixFromArray(const int *arr,
+                               int n_rows, int n_cols) {
+    matrix_t m = getMemMatrix(n_rows, n_cols);
+
+    int k = 0;
+    for (int i = 0; i < n_rows; i++)
+        for (int j = 0; j < n_cols; j++)
+            m.values[i][j] = arr[k++];
+
+    return m;
+}
+
+
+matrix_t *createArrayOfMatrixFromArray(const int *values,
+                                       size_t n_matrices, size_t n_rows, size_t n_cols) {
+    matrix_t *ms = getMemArrayOfMatrices(n_matrices, n_rows, n_cols);
+
+    int l = 0;
+    for (size_t k = 0; k < n_matrices; k++)
+        for (size_t i = 0; i < n_rows; i++)
+            for (size_t j = 0; j < n_cols; j++)
+                ms[k].values[i][j] = values[l++];
+
+    return ms;
 }

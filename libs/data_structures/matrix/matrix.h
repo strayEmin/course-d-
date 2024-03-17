@@ -8,6 +8,7 @@
 #include <stdbool.h>
 #include <memory.h>
 #include <windows.h>
+#include <limits.h>
 #include "../../algorithms/array/array.h"
 
 
@@ -84,6 +85,21 @@ void transposeSquareMatrix(matrix_t *m);
 
 // транспонирует матрицу по указателю *m
 void transposeMatrix(matrix_t *m);
+
+// возвращает позицию первого минимального элемента матрицы m
+position_t getMinValuePos(matrix_t m);
+
+// возвращает позицию первого максимального элемента матрицы m
+position_t getMaxValuePos(matrix_t m);
+
+// возвращает матрицу размера n_rows на n_cols, построенную из элементов массива arr
+matrix_t createMatrixFromArray(const int *arr,
+                               int n_rows, int n_cols);
+
+//  возвращает указатель на нулевую матрицу массива из n_matrices матриц, размещенных
+//в динамической памяти, построенных из элементов массива values
+matrix_t *createArrayOfMatrixFromArray(const int *values,
+                                       size_t n_matrices, size_t n_rows, size_t n_cols);
 
 
 #endif //COURSE_MATRIX_H
